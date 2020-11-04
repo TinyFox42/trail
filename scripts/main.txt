@@ -1,0 +1,7 @@
+#Ok, let's get down to business.
+#commands to initialize the resources this script uses. Right now these are just placeholders:
+/import skills skills.txt #here, the skills file would be called "skills.txt"
+/import cast monsters.txt #here, the NPCs list would be called "monsters.txt". Now that I think about it, there really isn't a reason the cast can't be initialized for each individual scene
+#/import players #here, it is calling the standard players list import, which is a hardcoded set of questions which allows for character creation here, a reference to a file somewhere on the computer with the players file, or just go to the default file location for a player file. This command is hardcoded so that you don't have to write this up every time, but not hardcoded into initilization in case you want to code your own character creation or something. Oh, I should code it up that you can pull Settlers from multiple files, so that you could have multiple players each with their own files and such.
+#No, character creation should be one menu in combination with setting up the Caravan, so that will need to be a 4th file type for town data, 
+#Now to code up some random scraps of script, just to see what I'm going to need to get code ready for.

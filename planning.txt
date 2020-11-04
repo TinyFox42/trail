@@ -27,3 +27,10 @@ So, what the actual player will be in charge of is the Caravan as a whole, which
 I don't know why I keep on saying resources, when what I really mean is supplies. Food, water, bullets, stuff to start you new life, bullets, I can't think of any other broad categories right now, bullets, etc., and bullets.
 
 ... I think I'm ready to start coding the base system of this game.
+Nope, I need more planning about how I'm going to do this.
+---Content Files---
+So, this will basically be a complicated choose-your-own adventure game, so a major file will be the book. I'll probably split it up into scenes, to keep the individual file sizes down. But yeah, I guess what I'm really coding is an interpereter for my own coding language, because I want this to be easy to modify (hardcode as little as possible).
+But really there will be like 3 major files/file types:
+	-The script, which may be really difficult. Has commands written into it that call up other script files and roll dice and put in your name and pronouns and such. Oh, and commands to ask for player input, that's important, isn't it. The module that the GM is following
+	-The skills, which is a list of all the skill names, costs, and such. Used to initialize the Settler system, so that we know what variables to create. If a skill is called for in the Script that doesn't exist in the Skills, it will throw an error (probably should write up something that checks the Script and points out any lines with errors, maybe compress or compile the Script as well)
+	-The Cast, which will be 2 files, one which will be the Settlers (created by the player, probably should write a tool that creates a Cast file for the player), and another which will be all the NPCs and such (think of this as the book of Statblocks, the MM)
