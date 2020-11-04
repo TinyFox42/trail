@@ -1,0 +1,22 @@
+Ok, so the first thing we need to make is the player, which is a collection of settlers and resources.
+---Settlers---
+Oh no, this is turning into me making an Oregon Trail d20 system...
+So, the major components of a settler are:
+	-Biography, stuff that doesn't really factor into the game mechanics, at least not that much. Age and sex fall into this, along with actual biographical details like name, gender, sexual orientation, the list goes on. If anything will affect actual mechanics, it will be age (which will have a table of stat changes of it), and sex (which if anything swaps a tiny bonus between strength and dexterity, along with some obvious things like only a biological female being able to get pregnant).
+	-Physical traits, a description of your physical build:
+		-Strength, phyiscal strength
+		-Dexterity, fine motor control, reaction time, and speed
+		-Constitution, physical heartiness and disease resistance
+	-Mental traits, which I may or may not include:
+		-Intelligence, a representation of base book smarts. I don't like this one, it should just be handled by skills. Maybe something that represents logical reasoning or memory or something
+		-Wisdom, which I want to call Perception, how well you notice things
+		-Charisma, your people skills. Also could be handled by the skills system
+	-Skills, a mix of knowledge and intuition. I have no idea what the full list will be at the current moment. You can take multiple levels in a skill, and can learn skills. Current ideas include:
+		-Medicine, how well you can treat diseases and injuries. May actually be a group of skills
+		-Foraging, how well you can find and collect wild plants. May have another skill paired with it, Herbalism, which is how well you can identify a plant (so Foraging is searching and collection, Herbalism is identification)
+		-Swimming
+		-Hunting, which is probably another skill category, as you can be skilled in multiple methods of hunting for food, though those things could fall under some combat mechanics, where you make a Hunting check to find the animal, and then you enter Combat to actually bring it down.
+		-Languages known
+		-Leadership, how well you can keep the group together. I guess this implies a morale mechanic as well...
+		-A bunch more, as this will be the major mechaic of the game
+	-Current condition, which includes any diseases, morale, relations with other Settlers, and a bunch of other stuff. 
