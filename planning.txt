@@ -20,3 +20,10 @@ So, the major components of a settler are:
 		-Leadership, how well you can keep the group together. I guess this implies a morale mechanic as well...
 		-A bunch more, as this will be the major mechaic of the game
 	-Current condition, which includes any diseases, morale, relations with other Settlers, and a bunch of other stuff. 
+---General talking---
+I want this to be easy to mod, pulling a lot of stuff from .csv or .txt files. Definitely want you to be able to add new skills, maybe add new traits, and I want to make it so that you can at least mod in elves (as in, add in a second "race" (species or breed) that changes up base skills and traits). Oh, and I definetly want to add a config option for having people medically or magically transition, maybe also for homosexual reproduction.
+---Caravan System---
+So, what the actual player will be in charge of is the Caravan as a whole, which is a collection of Settlers and resources. I have already said that. Anyway, the Caravan is made up of wagons (or other vehicles, probably want to add in modding support for that), which allow the Caravan to move the resources, and I have to do research to find out if people actually rode in the wagons or walked next to them.
+I don't know why I keep on saying resources, when what I really mean is supplies. Food, water, bullets, stuff to start you new life, bullets, I can't think of any other broad categories right now, bullets, etc., and bullets.
+
+... I think I'm ready to start coding the base system of this game.
