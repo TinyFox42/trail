@@ -19,6 +19,15 @@ public class Gender {
 	 *  	pronouns: An array of Strings that are the pronouns, in the same order they are listed below. Sorry, for now it's just one set of pronouns, I'll definitely put it in later (I use multiple pronoun sets)
 	 *  	dateables: An array of IDs, referencing only previously created genders. It will be turned into an arraylist, and whenever a future one is dateable to a past one, the past one will add that gender to its list. It can point back to itself
 	 *  There is a very good chance I will separate the pronouns and gender+orientation systems.
+	 *  Ok, if we separate pronouns and the gender+orientation system, we can cut it down to just the following templates:
+	 *  	-Straight "Man"
+	 *  	-Straight "Woman"
+	 *  	-Gay "Man"
+	 *  	-Lesbian
+	 *  	-Bi/Pan "Man" (Gay "Man"s and Straight "Woman"s will date them)
+	 *  	-Bi/Pan "Woman" (Lesbians and Straight "Man"s will date them)
+	 *  	-Bi/Pan Middle(?) (All orientations will date them)
+	 *  That's what, 7 different values, instead of however many I will have to make with the old system. Time to implement that
 	 */
 	private boolean _as_male;
 	private boolean _as_female;
