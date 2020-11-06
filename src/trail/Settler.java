@@ -28,4 +28,49 @@ public class Settler {
 	 * 	-Ability scores. Do I even need this, or can it be handled by skills and subskills?
 	 * 	-A list of skills. 
 	 */
+	private Gender _gender;
+	private int _age;//May want to change this to a different data type
+	//<Thing> _birthday;//Not sure how I want to handle this, for now I'll just leave it alone
+	private Char_Name _name;//May want to make Char_Name inheret some stuff from the same source as Pronouns. Note that this isn't the version that should be directly referenced by outside stuff, Settler.name() will probably return Subject form First/Nickname
+	private Biology _biology;//Handles both biological sex and any non-human stuff. Pretty much a box of stuff that I may just pull into here. The Biology object will still exist, I'm not sure if I'll inport the data from the object or save a pointer to the object. Probably save a pointer, and if I need to change something I can make a copy of the template and change the one variable
+	private boolean _aro;
+	private boolean _ace;
+	private boolean _male_attracted;
+	private boolean _female_attracted;//realized that this would make more sense than a magic number, only uses up 2 bits of data rather than <however long an int is>
+	//<however I'm handling skills>
+	/**
+	 * TODO add documentation
+	 */
+	public Settler(){//this is the one with the least information, and depending on how things go I may require the addition of some game instance to reference back to
+		this(Gender.base(),
+				0,	//0 years or days old, not sure which system I'm going to use
+				Char_Name.base(),
+				Biology.base(),
+				true, //Not attracted to anyone, as a good default
+				true,
+				false,
+				false);
+	}
+	/**
+	 * TODO add documentation
+	 * @param gender
+	 * @param age
+	 * @param name
+	 * @param biology
+	 * @param aro
+	 * @param ace
+	 * @param male_attracted
+	 * @param female_attracted
+	 */
+	public Settler(Gender gender, int age, Char_Name name, Biology biology, boolean aro, boolean ace, boolean male_attracted, boolean female_attracted) {
+		this._gender=gender;
+		this._age=age;
+		this._name=name;
+		this._biology=biology;
+		this._aro=aro;
+		this._ace=ace;
+		this._male_attracted=male_attracted;
+		this._female_attracted=female_attracted;
+	}
+	//TODO add a bunch of getters and setters
 }
