@@ -37,14 +37,19 @@ public class Settler {
 	private boolean _ace;
 	private boolean _male_attracted;
 	private boolean _female_attracted;//realized that this would make more sense than a magic number, only uses up 2 bits of data rather than <however long an int is>
+	/*
+	 * Ok, more thoughts on handling gender and orientation. What I mainly want is a method of one of those that takes one of the other and returns if there is a chance of attraction between them
+	 * Or I could just handle it in Settler...
+	 */
 	//<however I'm handling skills>
 	/**
+	 * Honestly this one should never be used, as the idea of the Gender and Biology systems is that there are like a handful of each, and everyone with the same gender or biology points to the same object
 	 * TODO add documentation
 	 */
 	public Settler(){//this is the one with the least information, and depending on how things go I may require the addition of some game instance to reference back to
-		this(Gender.base(),
+		this(new Gender(),
 				0,	//0 years or days old, not sure which system I'm going to use
-				Char_Name.base(),
+				Char_Name.base(), //I have no idea why I thought to do it this way, just use Char_Name()
 				Biology.base(),
 				true, //Not attracted to anyone, as a good default
 				true,

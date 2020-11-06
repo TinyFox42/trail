@@ -1,0 +1,46 @@
+{
+	"genders":[
+		{
+			"name":"Straight Man",
+			"id":0,
+			"pronouns":["he","him","his","his","himself","himself"],
+			"dateables":[]
+		},
+		{
+			"name":"Straight Woman",
+			"id":1,
+			"pronouns":["she","her","her","hers","herself","herself"],
+			"dateables":[0]
+		},
+		{
+			"name":"Classic Nonbinary (bi/pan)",
+			"id":2,
+			"pronouns":["they","them","their","theirs","themselves","themselves"],
+			"dateables":[0,1,2]
+		}
+		{
+			"name":"Classic Nonbinary (nblm)",
+			"id":3,
+			"pronouns":["they","them","their","theirs","themselves","themselves"],
+			"dateables":[0,2,3]
+		},
+		{
+			"name":"Classic Nonbinary (nblw)",
+			"id":4,
+			"pronouns":["they","them","their","theirs","themselves","themselves"],
+			"dateables":[1,2,4]
+		},
+		{
+			"name":"Gay Man",
+			"id":5,
+			"pronouns":["he","him","his","his","himself","himself"],
+			"dateables":[2,3,5]
+		},
+		{
+			"name":"Lesbian",
+			"id":6,
+			"pronouns":["she","her","her","hers","herself","herself"],
+			"dateables":[2,4,6]
+		}
+	]
+}
