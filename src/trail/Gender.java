@@ -1,5 +1,10 @@
 package trail;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import com.google.gson.*;
 import java.util.Scanner;
+
 public class Gender {
 	/* pretty much, for relationship purposes (who will data who), there are 2 variables. Note that I'm not saying there are only 4 gender, more of that in my observation there are 4 gender groups
 	 * 	So there are the 2 classic genders, male and female, who have _as_male and _as_female, respectively, set to true
@@ -29,50 +34,103 @@ public class Gender {
 	 *  	-Bi/Pan Middle(?) (All orientations will date them)
 	 *  That's what, 7 different values, instead of however many I will have to make with the old system. Time to implement that
 	 */
-	private boolean _as_male;
-	private boolean _as_female;
-	/*
-	 * Now, the pronouns variables. We may need to double the number of variables to handle capitalization at the start to the sentence, for neopronouns like ".wav" (which I have seen, but have no idea how you handle at the start of a sentence)
-	 * Or I may make a pronoun object with functions to get each form and a flag in the input for the capitalization form, and then I can handle it with inheritance. Yeah, that's probably how I should handle it
-	 * Oh, I actually need to do that anyway, for genderfluidity and other forms of multiple pronouns.
-	 * But for version 1 this will work.
-	 * TODO Change out this system for the more inclusive Pronouns objects
-	 */
-	private String _p_subject; 					//"he", "she", "they", "it"
-	private String _p_object; 					//"him", "her", "them", "it"
-	private String _p_possessive; 				//"his", "her", "their", "its"
-	private String _p_possessive_independent;	//"his", "hers", "theirs", "its"
-	private String _p_intensive; 				//"himself", "herself", "themselves"/"themself", "itself". "Bob did it himself"
-	private String _p_reflexive;				//"himself", "herself", "themselves"/"theirself", "itself". "Bob gave it to himself"
-	
-	public Gender() {
-		this(false,
-				false,
-				"they",
-				"them",
-				"thier",
-				"theirs",
-				"themselves",
-				"themselves");
+	private String _name;
+	private int _id;
+	private ArrayList<Gender> _dateable;
+	public Gender(String name, int id) {
+		this._name=name;
+		this._id=id;
+		this._dateable=new ArrayList<Gender>();
 	}
-	public Gender(boolean as_male, boolean as_female, String subject, String object, String possessive, String possessive_independent, String intensive, String reflexive) {
-		this._as_male=as_male;
-		this._as_female=as_female;
-		this._p_subject=subject;
-		this._p_object=object;
-		this._p_possessive=possessive;
-		this._p_possessive_independent=possessive_independent;
-		this._p_intensive=intensive;
-		this._p_reflexive=reflexive;
+	public void add_attraction(Gender g) {this._dateable.add(g);}
+	public int get_id() {return this._id;}
+	public static Gender_manager create_genders(String loc){//May change that to giving us the file directly, instead of having us shuffle around with directories and such
+		//honestly I don't even think I need that string for this tester, it should just be at ./genders.json
+		String genders_s = "";
+		try {
+			File genders_f = new File(loc);
+			Scanner scan = new Scanner(genders_f);
+			while (scan.hasNextLine()) {
+				genders_s+=scan.nextLine();
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			//File wasn't found
+			System.out.println("File was not found");
+			e.printStackTrace();
+		}
+		//Use gson to turn the string genders_s into an array of Gender_base
+		Gson gson = new Gson();
+		//Ok, apparently something is wrong with what I'm doing here...
+		//I think to get this to work I need to create the array and turn it into a json, and then use that as the genders.json, just to learn the right formatting and stuff
+		Gender_base[] genders_a = gson.fromJson(genders_s, Gender_base[].class);
+		//for(int i=0; i<genders_a.length; i++) {System.out.println(genders_a[i]);}
+		//Now we need to do the Gender_manager stuff
+		Gender_manager manager = new Gender_manager();
+		for (int i=0; i<genders_a.length; i++) {
+			manager.add(genders_a[i]);
+		}
+		return manager;
 	}
-	/**
-	 * I'm not that sure if this will exist anymore
-	 * @param scan The input stream thingy
-	 * @return A Gender object represented by the answers the user makes to the questions
-	 */
-	public static Gender creator(Scanner scan) {
-		//"Can a <man/woman> dating you call themselves straight?"
-		return new Gender();
+}
+class Gender_base{
+	public String name;
+	public int id;
+	public int[] dateable;
+	public Gender_base() {
+		
 	}
-
+	public String toString() {
+		//Mainly for debugging purposes
+		String ans="";
+		ans+="name:     "+this.name+"\n";
+		ans+="ID:       "+this.id+"\n";
+		ans+="dateable: [";//+this.dateable;//arrays don't have a nice .toString() method, so I have to manually format this
+		if (this.dateable.length>0) {
+			ans+=String.valueOf(this.dateable[0]);
+		}
+		for (int i=1; i<this.dateable.length; i++) {
+			ans+=", "+String.valueOf(this.dateable[i]);
+		}
+		ans+="]";
+		return ans;
+	}
+}
+class Gender_manager{
+	private ArrayList<Gender> genders;
+	private int next_id;
+	public Gender_manager() {
+		this.genders=new ArrayList<Gender>();
+		this.next_id=0;
+	}
+	public Gender add(Gender_base g) {
+		//We're just going to assume that genders.json is right. Later on in development we can throw an error if it is wrong
+		Gender gender=new Gender(g.name, g.id);
+		//add the attractions
+		for (int i=0; i<g.dateable.length; i++) {
+			Gender attract = this.find(g.dateable[i]);
+			gender.add_attraction(attract);
+			attract.add_attraction(gender);
+		}
+		this.next_id=g.id+1;
+		this.genders.add(gender);
+		return gender;
+	}
+	//TODO: adder for custon (none Gender_base) genders
+	public Gender find(int id) {
+		//First, we should check index that we would expect it to be at if everything was right
+		Gender g=genders.get(id);
+		if(g.get_id()==id) {
+			return g;
+		}
+		//If that didn't work, go through all of the other ones until we find it
+		for (int i=0; i<genders.size(); i++) {
+			if(i==id) {continue;}
+			g=genders.get(i);
+			if(g.get_id()==id) {
+				return g;
+			}
+		}
+		return null; //throw some form of error
+	}
 }

@@ -1,5 +1,4 @@
-{
-	"genders":[
+[
 		{
 			"name":"Straight \"Man\"",
 			"id":0,
@@ -19,7 +18,7 @@
 			"name":"Lesbian",
 			"id":3,
 			"dateable":[3]
-		}
+		},
 		{
 			"name":"Bi/Pan \"Man\"",
 			"id":4,
@@ -36,4 +35,3 @@
 			"dateable":[0,1,2,3,4,5,6]
 		}
 	]
-}
