@@ -2,7 +2,8 @@ package trail;
 import com.google.gson.*;
 public class Tester {
 	public static void main(String [] args) {
-		System.out.println(Gender.create_genders("./genders.json"));
+		Gender_manager man=Gender.create_genders("./genders.json");
+		System.out.println(man.get_info());
 		/*Gson gson = new Gson();
 		Gender_base base = new Gender_base();
 		base.name="Straight \"Male\"";

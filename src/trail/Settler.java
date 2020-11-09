@@ -46,6 +46,7 @@ public class Settler {
 	 * Honestly this one should never be used, as the idea of the Gender and Biology systems is that there are like a handful of each, and everyone with the same gender or biology points to the same object
 	 * TODO add documentation
 	 */
+	/*
 	public Settler(){//this is the one with the least information, and depending on how things go I may require the addition of some game instance to reference back to
 		this(new Gender(),
 				0,	//0 years or days old, not sure which system I'm going to use
@@ -56,6 +57,7 @@ public class Settler {
 				false,
 				false);
 	}
+	*/
 	/**
 	 * TODO add documentation
 	 * @param gender

@@ -44,6 +44,24 @@ public class Gender {
 	}
 	public void add_attraction(Gender g) {this._dateable.add(g);}
 	public int get_id() {return this._id;}
+	public String toString() {
+		//This is the simple print, which just returns the name and id, to stop a recursive loop of printing the references to attractions
+		String ans=this._name+" (#"+String.valueOf(this._id)+")";
+		return ans;
+	}
+	public String get_info() {
+		//This is the full print, which should never be called by Genders, as that risks an infinite loop. Thankfully that would be recursive and the stack would overflow after some point
+		String ans="";
+		ans+="name: "+_name+"\n";
+		ans+="ID:   "+String.valueOf(_id)+"\n";//I just remembered we don't always need to use the this keyword
+		ans+="Attractions:";
+		for (int i=0; i<_dateable.size();i++) {
+			Gender g=_dateable.get(i);
+			ans+="\n\t"+g.toString();
+		}
+		return ans;
+	}
+	//This may be moved to Gender_manager later on
 	public static Gender_manager create_genders(String loc){//May change that to giving us the file directly, instead of having us shuffle around with directories and such
 		//honestly I don't even think I need that string for this tester, it should just be at ./genders.json
 		String genders_s = "";
@@ -108,7 +126,13 @@ class Gender_manager{
 		Gender gender=new Gender(g.name, g.id);
 		//add the attractions
 		for (int i=0; i<g.dateable.length; i++) {
-			Gender attract = this.find(g.dateable[i]);
+			int id=g.dateable[i];
+			if (id==g.id) {
+				//TODO: Make it so that this turns on a flag in the Gender, instead of making a recursive reference
+				gender.add_attraction(gender);
+				continue;
+			}
+			Gender attract = this.find(id);
 			gender.add_attraction(attract);
 			attract.add_attraction(gender);
 		}
@@ -119,18 +143,28 @@ class Gender_manager{
 	//TODO: adder for custon (none Gender_base) genders
 	public Gender find(int id) {
 		//First, we should check index that we would expect it to be at if everything was right
-		Gender g=genders.get(id);
+		/*Gender g=genders.get(id);
 		if(g.get_id()==id) {
 			return g;
-		}
+		}*/
 		//If that didn't work, go through all of the other ones until we find it
 		for (int i=0; i<genders.size(); i++) {
-			if(i==id) {continue;}
-			g=genders.get(i);
+			//if(i==id) {continue;}
+			Gender g=genders.get(i);
 			if(g.get_id()==id) {
 				return g;
 			}
 		}
 		return null; //throw some form of error
+	}
+	public String get_info() {
+		String ans="";
+		ans+="Next ID: "+String.valueOf(next_id);
+		ans+="\nGenders:";
+		for (int i=0; i<genders.size(); i++) {
+			ans+="\n---"+String.valueOf(i)+"---\n";
+			ans+=genders.get(i).get_info();
+		}
+		return ans;
 	}
 }
