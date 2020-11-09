@@ -37,18 +37,39 @@ public class Gender {
 	private String _name;
 	private int _id;
 	private ArrayList<Gender> _dateable;
+	/**
+	 * The base constructor for Genders. Sets the name and id to the inputted variables, and creates an empty ArrayList for the attractions
+	 * @param name A string for the name of the Gender
+	 * @param id An int for the id of the Gender (which is used to create the network of attractions)
+	 */
 	public Gender(String name, int id) {
 		this._name=name;
 		this._id=id;
 		this._dateable=new ArrayList<Gender>();
 	}
-	public void add_attraction(Gender g) {this._dateable.add(g);}
-	public int get_id() {return this._id;}
+	/**
+	 * Adds the given Gender to the list of attractions.
+	 * @param g The Gender to be added
+	 */
+	public void add_attraction(Gender g) {
+		this._dateable.add(g);
+	}
+	/**
+	 * Returns the id of the Gender, for creating the network of attractions, mainly
+	 * @return The int id of the Gender
+	 */
+	public int get_id() {
+		return this._id;
+	}
 	public String toString() {
 		//This is the simple print, which just returns the name and id, to stop a recursive loop of printing the references to attractions
 		String ans=this._name+" (#"+String.valueOf(this._id)+")";
 		return ans;
 	}
+	/**
+	 * Please avoid overwriting this, otherwise you could easily get an infinite loop, because the attractions are a complicated network
+	 * @return A String that lists all the variables of the Gender, with the attractions ArrayList printing the .toString() output of the Gender, to stop infinite recursion
+	 */
 	public String get_info() {
 		//This is the full print, which should never be called by Genders, as that risks an infinite loop. Thankfully that would be recursive and the stack would overflow after some point
 		String ans="";
