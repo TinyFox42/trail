@@ -1,0 +1,9 @@
+[
+	{
+		"name":["Bob","Bob's","Bob Smith"],
+		"age":20,
+		"gender_id":0,
+		"aro":false,
+		"ace":false
+	}
+]

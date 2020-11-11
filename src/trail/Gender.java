@@ -83,6 +83,7 @@ public class Gender {
 		return ans;
 	}
 	//This may be moved to Gender_manager later on
+	//TODO: Remove the following function, it was just a proof-of-concept
 	public static Gender_manager create_genders(String loc){//May change that to giving us the file directly, instead of having us shuffle around with directories and such
 		//honestly I don't even think I need that string for this tester, it should just be at ./genders.json
 		String genders_s = "";
@@ -144,6 +145,7 @@ class Gender_manager{
 	}
 	public Gender add(Gender_base g) {
 		//We're just going to assume that genders.json is right. Later on in development we can throw an error if it is wrong
+		//TODO: Add a check for redundant Gender initializations. Note that we can have two very similar genders, the unique identifier here is the ID variable
 		Gender gender=new Gender(g.name, g.id);
 		//add the attractions
 		for (int i=0; i<g.dateable.length; i++) {
@@ -159,10 +161,12 @@ class Gender_manager{
 		}
 		this.next_id=g.id+1;
 		this.genders.add(gender);
-		return gender;
+		return gender; //wait, why are we returning the gender?
+		//TODO: Find out why we're returning the Gender here, or stop doing it
 	}
 	//TODO: adder for custon (none Gender_base) genders
 	public Gender find(int id) {
+		//TODO: Either put this optimization back in and test it, or remove it from the files
 		//First, we should check index that we would expect it to be at if everything was right
 		/*Gender g=genders.get(id);
 		if(g.get_id()==id) {
@@ -170,13 +174,21 @@ class Gender_manager{
 		}*/
 		//If that didn't work, go through all of the other ones until we find it
 		for (int i=0; i<genders.size(); i++) {
-			//if(i==id) {continue;}
+			//if(i==id) {continue;} A side part of the possibly-removed optimization, which was to check the index the ID should be at first, so we can skip it later
 			Gender g=genders.get(i);
 			if(g.get_id()==id) {
 				return g;
 			}
 		}
 		return null; //throw some form of error
+	}
+	public void initialize_genders(String json) {
+		//Note that that json is the /contents/ of the json file, not the file location
+		Gson gson = new Gson(); //Maybe we will want to get this from somewhere higher up, so that we aren't initializing gson so many times.
+		Gender_base[] gs=gson.fromJson(json, Gender_base[].class);
+		for (int i=0; i<gs.length; i++) {
+			this.add(gs[i]);
+		}
 	}
 	public String get_info() {
 		String ans="";

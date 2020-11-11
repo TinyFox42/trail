@@ -1,9 +1,10 @@
 package trail;
 import com.google.gson.*;
+import java.util.Scanner;
 public class Tester {
 	public static void main(String [] args) {
-		Gender_manager man=Gender.create_genders("./genders.json");
-		System.out.println(man.get_info());
+		//Gender_manager man=Gender.create_genders("./genders.json");
+		//System.out.println(man.get_info());
 		/*Gson gson = new Gson();
 		Gender_base base = new Gender_base();
 		base.name="Straight \"Male\"";
@@ -21,6 +22,10 @@ public class Tester {
 		for (int i=0; i<bases_imported.length; i++) {
 			System.out.println(bases_imported[i]);
 		}*/
+		
+		
+	}
+	public static void character_creator(Settler_Manager settlers) {
 		
 	}
 }

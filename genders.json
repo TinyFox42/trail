@@ -1,37 +1,37 @@
 [
-		{
-			"name":"Straight \"Man\"",
-			"id":0,
-			"dateable":[]
-		},
-		{
-			"name":"Straight \"Woman\"",
-			"id":1,
-			"dateable":[0]
-		},
-		{
-			"name":"Gay \"Man\"",
-			"id":2,
-			"dateable":[2]
-		},
-		{
-			"name":"Lesbian",
-			"id":3,
-			"dateable":[3]
-		},
-		{
-			"name":"Bi/Pan \"Man\"",
-			"id":4,
-			"dateable":[1,2,4]
-		},
-		{
-			"name":"Bi/Pan \"Woman\"",
-			"id":5,
-			"dateable":[0,3,4,5]
-		},
-		{
-			"name":"Bi/Pan \"Other\"",
-			"id":6,
-			"dateable":[0,1,2,3,4,5,6]
-		}
-	]
+	{
+		"name":"Straight \"Man\"",
+		"id":0,
+		"dateable":[]
+	},
+	{
+		"name":"Straight \"Woman\"",
+		"id":1,
+		"dateable":[0]
+	},
+	{
+		"name":"Gay \"Man\"",
+		"id":2,
+		"dateable":[2]
+	},
+	{
+		"name":"Lesbian",
+		"id":3,
+		"dateable":[3]
+	},
+	{
+		"name":"Bi/Pan \"Man\"",
+		"id":4,
+		"dateable":[1,2,4]
+	},
+	{
+		"name":"Bi/Pan \"Woman\"",
+		"id":5,
+		"dateable":[0,3,4,5]
+	},
+	{
+		"name":"Bi/Pan \"Other\"",
+		"id":6,
+		"dateable":[0,1,2,3,4,5,6]
+	}
+]

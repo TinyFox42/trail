@@ -1,8 +1,20 @@
 package trail;
-/**
- * (Put documentation here)
- */
+
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import com.google.gson.*;
+
 public class Settler {
+	public Settler(Char_Name name, int age, Gender g, boolean aro, boolean ace) {
+		// TODO Auto-generated constructor stub
+		this._name=name;
+		this._age=age;
+		this._gender=g;
+		this._aro=aro;
+		this._ace=ace;
+	}
 	/* Ok, more thinking, now about how I will actually implement this.
 	 * Every settler has:
 	 * 	-A biography, which is made up of:
@@ -29,55 +41,68 @@ public class Settler {
 	 * 	-A list of skills. 
 	 */
 	private Gender _gender;
+	private Pronouns _pronouns;
 	private int _age;//May want to change this to a different data type
 	//<Thing> _birthday;//Not sure how I want to handle this, for now I'll just leave it alone
 	private Char_Name _name;//May want to make Char_Name inheret some stuff from the same source as Pronouns. Note that this isn't the version that should be directly referenced by outside stuff, Settler.name() will probably return Subject form First/Nickname
 	private Biology _biology;//Handles both biological sex and any non-human stuff. Pretty much a box of stuff that I may just pull into here. The Biology object will still exist, I'm not sure if I'll inport the data from the object or save a pointer to the object. Probably save a pointer, and if I need to change something I can make a copy of the template and change the one variable
 	private boolean _aro;
 	private boolean _ace;
-	private boolean _male_attracted;
-	private boolean _female_attracted;//realized that this would make more sense than a magic number, only uses up 2 bits of data rather than <however long an int is>
-	/*
-	 * Ok, more thoughts on handling gender and orientation. What I mainly want is a method of one of those that takes one of the other and returns if there is a chance of attraction between them
-	 * Or I could just handle it in Settler...
-	 */
-	//<however I'm handling skills>
-	/**
-	 * Honestly this one should never be used, as the idea of the Gender and Biology systems is that there are like a handful of each, and everyone with the same gender or biology points to the same object
-	 * TODO add documentation
-	 */
-	/*
-	public Settler(){//this is the one with the least information, and depending on how things go I may require the addition of some game instance to reference back to
-		this(new Gender(),
-				0,	//0 years or days old, not sure which system I'm going to use
-				Char_Name.base(), //I have no idea why I thought to do it this way, just use Char_Name()
-				Biology.base(),
-				true, //Not attracted to anyone, as a good default
-				true,
-				false,
-				false);
+	//TODO: Work in the skills system. And create it, I guess
+	
+}
+class Settler_Manager{
+	public Gender_manager genders;
+	private ArrayList<Settler> settlers;
+	public Settler_Manager() {
+		//Initialize Genders
+		genders=new Gender_manager();
+		String genders_json="";
+		try {
+			File genders_f = new File("./genders.json");
+			Scanner scan = new Scanner(genders_f);
+			while (scan.hasNextLine()) {
+				genders_json+=scan.nextLine();
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			//File wasn't found
+			//TODO: Better error reporting, maybe don't crash?
+			System.out.println("Genders file was not found");
+			e.printStackTrace();
+		}
+		genders.initialize_genders(genders_json);
+		//Create the settlers array
+		settlers=new ArrayList<Settler>();
 	}
-	*/
-	/**
-	 * TODO add documentation
-	 * @param gender
-	 * @param age
-	 * @param name
-	 * @param biology
-	 * @param aro
-	 * @param ace
-	 * @param male_attracted
-	 * @param female_attracted
-	 */
-	public Settler(Gender gender, int age, Char_Name name, Biology biology, boolean aro, boolean ace, boolean male_attracted, boolean female_attracted) {
-		this._gender=gender;
-		this._age=age;
-		this._name=name;
-		this._biology=biology;
-		this._aro=aro;
-		this._ace=ace;
-		this._male_attracted=male_attracted;
-		this._female_attracted=female_attracted;
+	public void add_settler(Settler s) {
+		settlers.add(s);
 	}
-	//TODO add a bunch of getters and setters
+	public Settler add_settler(Char_Name name, Gender g, int age, boolean aro, boolean ace) {
+		Settler s=new Settler(name, age, g, aro, ace);//not sure what order these arguments will be required in
+		this.add_settler(s);
+		return s;
+	}
+	public Settler add_settler(Settler_Simple simple) {
+		
+		return null;
+	}
+	public void initialize_settlers(String json) {
+		//json is the contents of the JSON file
+		Gson gson=new Gson();
+		Settler_Simple[] simples=gson.fromJson(json, Settler_Simple[].class);
+		for (int i=0; i<simples.length; i++) {
+			//Turn the simple into a full settler
+		}
+	}
+}
+class Settler_Simple{
+	public String[] name;
+	public int age;
+	public int gender_id;
+	public boolean aro;
+	public boolean ace;
+	public Settler_Simple() {
+		
+	}
 }
