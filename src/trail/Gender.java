@@ -112,6 +112,14 @@ public class Gender {
 		}
 		return manager;
 	}
+	public boolean is_attracted(Gender g) {
+		for (int i=0; i<_dateable.size(); i++) {
+			if(_dateable.get(i).equals(g)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 class Gender_base{
 	public String name;
@@ -142,6 +150,8 @@ class Gender_manager{
 	public Gender_manager() {
 		this.genders=new ArrayList<Gender>();
 		this.next_id=0;
+		Gender err=new Gender("GENDER ASSIGN ERROR", -1);//A gender for an error in reading stuff, put in for a default case in the settler stuff
+		genders.add(err);
 	}
 	public Gender add(Gender_base g) {
 		//We're just going to assume that genders.json is right. Later on in development we can throw an error if it is wrong

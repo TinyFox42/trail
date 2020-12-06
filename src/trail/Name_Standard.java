@@ -1,7 +1,7 @@
 package trail;
 
 public class Name_Standard extends Char_Name {
-	/*
+	/* No need to actually override these methods
 	@Override
 	public String get_form(int familiarity, int form) {
 		return null;
